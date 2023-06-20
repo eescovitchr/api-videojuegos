@@ -40,11 +40,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.sonarsource.sonarqube/sonar-plugin-api -->
 		<dependency>
-    			<groupId>org.sonarsource.scanner.maven</groupId>
-    			<artifactId>sonar-maven-plugin</artifactId>
-    			<version>3.0-RC1</version>
+    			<groupId>org.sonarsource.sonarqube</groupId>
+    			<artifactId>sonar-plugin-api</artifactId>
+    			<version>9.3.0.51899</version>
+    			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
