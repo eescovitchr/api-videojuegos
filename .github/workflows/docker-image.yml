@@ -1,0 +1,21 @@
+name: CI Semillero
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  IMAGE_NAME: "eescovitchr/api-videojuegos"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.4.4
+    - name: dependencias Maven
+      run: "mvn install --no-cache-dir --upgrade -r requirements.txt"
+    - name: unit test maven
+      run: "mvn test"
