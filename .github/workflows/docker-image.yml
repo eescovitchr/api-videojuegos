@@ -17,6 +17,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Setup Java JDK
       uses: actions/setup-java@v1.4.4
+      java-version: '17'
     - name: dependencias maven
       run: "mvn install --no-cache-dir --upgrade -r requirements.txt"
     - name: unit test mvn
