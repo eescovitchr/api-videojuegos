@@ -1,0 +1,170 @@
+swagger: "2.0"
+info:
+  title: API de tienda de videojuegos.
+  description: Esta API se encarga de administrar el inventario de la tienda de videojuegos.
+  version: "1.0.0"
+host: "localhost:8080"
+basePath: "/api"
+tags:
+- name: "videjuegos"
+  description: "Operaciones CRUD de videojuegos"
+schemes:
+- "https"
+- "http"  
+paths:
+  /videojuegos:
+    post:
+      tags:
+      - "videjuegos"
+      summary: "Añade un nuevo videojuego"
+      description: "Permite añadir un nuevo videojuego al inventario."
+      operationId: "Guardarvideojuego"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "El objeto videojuego que sera añadido al inventario."
+        required: true
+        schema:
+          $ref: "#/definitions/GuardarVideojuego"
+      responses:
+        201:
+          description: "Creado"
+          schema:
+            $ref: "#/definitions/Videojuego"
+        405:
+          description: "Datos no validos"
+    get:
+      tags:
+      - "videjuegos"
+      summary: "Obtener listado de todos los videojuegos."
+      description: "Obtiene todos los videojuegos almacenados en la base de datos."
+      operationId: "ObtenerVideojuegos"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Operacion exitosa"
+          schema:
+            $ref: "#/definitions/Videojuegos"
+        404:
+          description: "Juegos no encontrados"    
+  /videojuegos/{id}:
+    get:
+      tags:
+      - "videjuegos"
+      summary: "Obtiene un videojuego por Id."
+      description: "Obtiene el videojuego con el Id introducido."
+      operationId: "obtenerVideojuegoPorId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id del videojuego."
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Operacion exitosa"
+          schema:
+            $ref: "#/definitions/Videojuego"
+        404:
+          description: "Juego no encontrado"
+    put:
+      tags:
+      - "videjuegos"
+      summary: "Actualiza un videojuego por Id."
+      description: "Actualiza toda la informacion del videojuego con el Id introducido."
+      operationId: "actualizarVideojuego"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id del videojuego."
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "El objeto videojuego que sera actualizado en la base de datos."
+        required: true
+        schema:
+          $ref: "#/definitions/ActualizarVideojuego"  
+      responses:
+        201:
+          description: "Creado"
+          schema:
+            $ref: "#/definitions/Videojuego"
+        404:
+          description: "Juego no encontrado"       
+    delete:
+      tags:
+      - "videjuegos"
+      summary: "Elimina un videojuego por Id."
+      description: "Elimina el videojuego con el Id introducido."
+      operationId: "eliminarVideojuego"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id del videojuego"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "Operacion exitosa"
+        404:
+          description: "Juego no encontrado"
+definitions:
+  Videojuego:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: "7"
+      nombre:
+        type: "string"
+        example: "Read Dead Redemption II"
+      plataforma:
+        type: "string"
+        example: "XBOX Series S|X"
+      precio:
+        type: "number"
+        format: "double"
+        example: 299900 
+  Videojuegos:
+    type: "array"
+    items:
+      $ref: "#/definitions/Videojuego"
+  GuardarVideojuego:
+    type: "object"
+    properties:
+      nombre:
+        type: "string"
+        example: "Read Dead Redemption II"
+      plataforma:
+        type: "string"
+        example: "XBOX Series S|X"
+      precio:
+        type: "number"
+        format: "double"
+        example: 299900    
+  ActualizarVideojuego:
+    type: "object"
+    properties:
+      nombre:
+        type: "string"
+        example: "Read Dead Redemption II"
+      plataforma:
+        type: "string"
+        example: "XBOX Series S|X"
+      precio:
+        type: "number"
+        format: "double"
+        example: 299900 
