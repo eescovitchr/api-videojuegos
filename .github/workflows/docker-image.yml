@@ -25,7 +25,7 @@ jobs:
     - name: unit test mvn
       run: "mvn test"
     - name: Analyze with SonarCloud
-      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=api-videojuegos -Dsonar.organization=eescovitch -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=api-videojuegos -Dsonar.organization=eescovitchr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
     - name: SonarQube Quality Gate Check
       uses: sonarsource/sonarqube-quality-gate-action@master
       timeout-minutes: 5
