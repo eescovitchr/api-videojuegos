@@ -26,6 +26,8 @@ jobs:
       run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=api-videojuegos -Dsonar.organization=eescovitchr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     - name: SonarQube Quality Gate Check
       uses: sonarsource/sonarqube-quality-gate-action@master
+      with:
+        scanMetadataReportFile: target/sonar/report-task.txt
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
