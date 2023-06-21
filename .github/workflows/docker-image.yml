@@ -18,13 +18,12 @@ jobs:
       uses: actions/setup-java@v1.4.4
       with:
         java-version: '17'
-    - name: Build with Maven
+    - name: Compile and build maven
       run: mvn --batch-mode --update-snapshots package
-    - name: unit test mvn
-      run: "mvn test"
+    - name: Unit test maven
+      run: mvn test
     - name: Generate code coverage report
       run: ./mvnw jacoco:report
-
     - name: Analyze with SonarCloud
       run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=api-videojuegos -Dsonar.organization=eescovitchr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     - name: SonarQube Quality Gate Check
