@@ -24,15 +24,9 @@ jobs:
       run: "mvn test"
     - name: Generate code coverage report
       run: ./mvnw jacoco:report
-    - name: Make code coverage
-      uses: paambaati/codeclimate-action@v3.2.0
-      env:
-        CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-        JACOCO_SOURCE_PATH: app/src/main/java
-      with:
-        debug: true
-        coverageCommand: make -C app report
-        coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco  
+    - name: jacoco-reporter
+      uses: PavanMudigonda/jacoco-reporter@v4.8
+
     - name: Analyze with SonarCloud
       run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=api-videojuegos -Dsonar.organization=eescovitchr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     - name: SonarQube Quality Gate Check
