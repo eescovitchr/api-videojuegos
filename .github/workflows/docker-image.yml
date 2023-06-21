@@ -27,6 +27,8 @@ jobs:
     - name: SonarQube Quality Gate Check
       uses: sonarsource/sonarqube-quality-gate-action@master
       timeout-minutes: 5
+      env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
   docker-build:
     runs-on: ubuntu-latest
